@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Shubham Kumar — Portfolio</title>
+    <meta name="description"
+        content="Shubham Kumar — SDE3 | Java, Kafka, Spark, Microservices | Portfolio & Timeline" />
+    <!-- GSAP + ScrollTrigger (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --navy: #071630;
+            --accent: #1f75ff;
+            --accent-2: #6ea8ff;
+            --bg-1: #0b2545;
+            --bg-2: #081a33;
+            --card: #ffffff;
+            --muted: #6b7280;
+            --glass: rgba(255, 255, 255, 0.06);
+            --card-radius: 14px;
+            --max-w: 1100px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            color: var(--navy);
+            background: linear-gradient(180deg, #f6f8fb 0%, #eef5ff 100%);
+            -webkit-font-smoothing: antialiased
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .container {
+            max-width: var(--max-w);
+            margin: 28px auto;
+            padding: 28px
+        }
+
+        /* --- NAV --- */
+        header.site-header {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 12px;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            pointer-events: none
+        }
+
+        .nav-inner {
+            width: var(--max-w);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 18px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.2));
+            backdrop-filter: blur(6px);
+            border-radius: 999px;
+            box-shadow: 0 8px 30px rgba(11, 37, 69, 0.06);
+            pointer-events: auto
+        }
+
+        .logo {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .logo .badge {
+            width: 44px;
+            height: 44;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700
+        }
+
+        nav.links {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        nav.links a {
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            color: #06203a
+        }
+
+        nav.links a:hover {
+            background: rgba(31, 117, 255, 0.08)
+        }
+
+        /* --- HERO --- */
+        .hero {
+            margin-top: 74px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            min-height: 64vh;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(800px 300px at 10% 10%, rgba(31, 117, 255, 0.06), transparent),
+                radial-gradient(600px 250px at 90% 90%, rgba(110, 168, 255, 0.04), transparent),
+                linear-gradient(180deg, var(--bg-1), var(--bg-2));
+            color: white;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(7, 22, 48, 0.5);
+        }
+
+        .hero-left {
+            flex: 1;
+            max-width: 720px
+        }
+
+        .hero-right {
+            width: 320px;
+            margin-left: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .name {
+            font-size: 36px;
+            margin: 0;
+            letter-spacing: -0.6px;
+            line-height: 1.02;
+            text-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .glow {
+            display: inline-block;
+            background: linear-gradient(90deg, rgba(31, 117, 255, 0.85), rgba(110, 168, 255, 0.8));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .role {
+            font-size: 18px;
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .hero-cta {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(31, 117, 255, 0.12)
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 12px;
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.9)
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600
+        }
+
+        .meta-pill {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 999px;
+            font-size: 13px
+        }
+
+        /* scroll arrow */
+        .scroll-arrow {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 18px;
+            opacity: 0.9;
+            cursor: pointer
+        }
+
+        .scroll-arrow svg {
+            width: 32px;
+            height: 32px;
+            fill: transparent;
+            stroke: white;
+            stroke-width: 2;
+            animation: float 2.4s ease-in-out infinite
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(-50%, 0)
+            }
+
+            50% {
+                transform: translate(-50%, 8px)
+            }
+
+            100% {
+                transform: translate(-50%, 0)
+            }
+        }
+
+        /* --- SECTIONS --- */
+        section.card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 28px;
+            box-shadow: 0 10px 30px rgba(11, 37, 69, 0.06)
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px
+        }
+
+        .section-title h2 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--navy)
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 20px
+        }
+
+        @media (max-width:980px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            .hero-right {
+                display: none
+            }
+        }
+
+        @media (max-width:520px) {
+            .name {
+                font-size: 28px
+            }
+        }
+
+        /* About */
+        .about-flex {
+            display: flex;
+            gap: 18px;
+            align-items: center
+        }
+
+        .avatar-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 32px;
+            box-shadow: 0 12px 30px rgba(11, 37, 69, 0.12)
+        }
+
+        .about-text p {
+            color: var(--muted);
+            margin: 8px 0
+        }
+
+        /* Skills */
+        .skills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px
+        }
+
+        .skill-badge {
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #fff, #fbfdff);
+            border: 1px solid rgba(11, 37, 69, 0.04);
+            font-weight: 700;
+            transform-origin: center;
+            display: inline-block;
+            cursor: default
+        }
+
+        /* Tilt (on hover) */
+        .tilt {
+            transition: transform .25s ease, box-shadow .25s ease
+        }
+
+        .tilt:hover {
+            transform: translateY(-8px) rotateX(6deg);
+            box-shadow: 0 18px 40px rgba(11, 37, 69, 0.08)
+        }
+
+        /* Projects / Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px
+        }
+
+        @media(max-width:700px) {
+            .projects-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .proj {
+            padding: 14px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #fff, #fbfdff);
+            border: 1px solid rgba(11, 37, 69, 0.04);
+            cursor: pointer;
+            transform-origin: center;
+            transition: transform .28s, box-shadow .28s
+        }
+
+        .proj:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 26px 60px rgba(11, 37, 69, 0.06)
+        }
+
+        /* Timeline (vertical) */
+        .timeline {
+            position: relative;
+            padding-left: 26px;
+            margin-top: 6px
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent), var(--accent-2));
+            border-radius: 4px;
+            opacity: 0.18
+        }
+
+        .item {
+            position: relative;
+            margin: 18px 0;
+            padding: 16px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #fff, #fbfdff);
+            border: 1px solid rgba(11, 37, 69, 0.04);
+            box-shadow: 0 8px 30px rgba(11, 37, 69, 0.03);
+            transform: translateX(-30px);
+            opacity: 0
+        }
+
+        .item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 22px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 4px solid var(--accent)
+        }
+
+        .item h4 {
+            margin: 0
+        }
+
+        .item .time {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 6px
+        }
+
+        .item .desc {
+            color: var(--muted);
+            margin-top: 8px;
+            font-size: 14px
+        }
+
+        /* Certificates flip-card */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px
+        }
+
+        @media(max-width:920px) {
+            .cert-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media(max-width:520px) {
+            .cert-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .flip {
+            perspective: 1200px
+        }
+
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            min-height: 110px;
+            transition: transform .6s;
+            transform-style: preserve-3d;
+            border-radius: 12px
+        }
+
+        .flip:hover .flip-inner {
+            transform: rotateY(180deg)
+        }
+
+        .flip-front,
+        .flip-back {
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px
+        }
+
+        .flip-front {
+            background: linear-gradient(180deg, #fff, #fbfdff);
+            border: 1px solid rgba(11, 37, 69, 0.04)
+        }
+
+        .flip-back {
+            background: linear-gradient(180deg, var(--accent), var(--accent-2));
+            color: white;
+            transform: rotateY(180deg)
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+
+        @media(max-width:520px) {
+            .contact-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .contact-card {
+            padding: 12px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #fff, #fbfdff);
+            border: 1px solid rgba(11, 37, 69, 0.04)
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(11, 37, 69, 0.06);
+            margin-top: 8px
+        }
+
+        footer {
+            margin-top: 28px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            padding-bottom: 80px
+        }
+
+        /* small utilities */
+        .muted {
+            color: var(--muted)
+        }
+
+        .center {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <header class="site-header" aria-hidden="false">
+        <div class="nav-inner">
+            <div class="logo">
+                <div class="badge">SK</div>
+                <div>
+                    <div style="font-weight:800">Shubham Kumar</div>
+                    <div style="font-size:12px;color:var(--muted)">SDE3 • Backend & Data Systems</div>
+                </div>
+            </div>
+            <nav class="links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#certs">Certs</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home" aria-label="Hero">
+        <div class="container" style="display:flex;align-items:center;gap:18px;width:100%;padding:0">
+            <div class="hero-left">
+                <h1 class="name"><span class="glow" id="glowName">Shubham Kumar</span></h1>
+                <div class="role">Software Development Engineer 3 — Backend & Data Systems</div>
+                <div style="height:8px"></div>
+                <div class="hero-cta">
+                    <a class="btn-primary" href="#contact">Hire / Contact</a>
+                    <a class="btn-ghost" href="#" onclick="downloadResume()">Download Resume</a>
+                </div>
+
+                <div class="hero-meta" style="margin-top:18px">
+                    <div class="meta-pill">NAVI — SDE3</div>
+                    <div class="meta-pill">Java · Kafka · Spark</div>
+                    <div class="meta-pill">Bengaluru</div>
+                </div>
+
+                <p style="margin-top:18px;color:rgba(255,255,255,0.85);max-width:62%">
+                    Backend engineer with 4+ years building production-grade systems: BRE rule engines, anomaly
+                    detection (Flink & Pinot), co-lending analytics, and high-throughput event processing.
+                </p>
+            </div>
+
+            <div class="hero-right">
+                <div class="card center" style="flex-direction:column;gap:8px">
+                    <div style="font-weight:800">Quick Facts</div>
+                    <div class="muted small">NIT Patna — B.Tech CSE</div>
+                    <div style="display:flex;gap:8px;margin-top:8px">
+                        <div class="meta-pill">Java</div>
+                        <div class="meta-pill">Kafka</div>
+                    </div>
+                    <div style="margin-top:8px" class="muted small">Awards: Navi Spearhead (Apr 2024), Oyo Cost Warrior
+                        (2021)</div>
+                </div>
+
+                <div class="card tilt" style="margin-top:14px;">
+                    <div style="font-weight:700">Availability</div>
+                    <div class="muted small">Open to opportunities • Based in Bengaluru</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-arrow" title="Scroll to About"
+            onclick="document.querySelector('#about').scrollIntoView({behavior:'smooth'})">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" />
+            </svg>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- ABOUT -->
+        <section id="about" class="card" data-section>
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-flex">
+                <div class="avatar-large">SK</div>
+                <div class="about-text">
+                    <p>
+                        I'm Shubham — a backend engineer focused on building reliable, scalable systems for fintech. I
+                        enjoy designing event-driven systems, improving observability, and turning complex data into
+                        actionable signals.
+                    </p>
+                    <p class="muted">
+                        <strong>Languages:</strong> English (Full Professional), Hindi (Full Professional) •
+                        <strong>Interests:</strong> Badminton, Cricket, Chess, Music
+                    </p>
+                    <div style="margin-top:10px">
+                        <a class="btn-primary" href="mailto:shubhamk541@gmail.com">Email: shubhamk541@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="card" data-section>
+            <div class="section-title">
+                <h2>Skills & Technologies</h2>
+            </div>
+            <div class="skills-wrap" id="skillsWrap">
+                <!-- JS injects skill badges -->
+            </div>
+        </section>
+
+        <!-- EXPERIENCE + Timeline (left) and Projects (right) -->
+        <div class="grid">
+            <section id="experience" class="card" data-section>
+                <div class="section-title">
+                    <h2>Work Experience — Timeline</h2>
+                </div>
+                <div class="timeline" id="timeline">
+                    <!-- timeline items injected by JS OR can be hard-coded -->
+                    <div class="item">
+                        <h4>Software Development Engineer 3 — NAVI</h4>
+                        <div class="time">Jul 2024 — Present • Bengaluru</div>
+                        <div class="desc">
+                            • Built a Self-Serve BRE rule engine — reduced policy change turnaround from 3 days to ~15
+                            minutes.<br>
+                            • Architected & developed a multi-tenant Anomaly Detection Engine using Apache Flink & Pinot
+                            to monitor co-lending funnels and alert on deviations.<br>
+                            • Improved observability: metrics, dashboards & alerting for mission-critical flows.
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <h4>Software Development Engineer 2 — NAVI</h4>
+                        <div class="time">Sep 2021 — Jun 2024 • Bengaluru</div>
+                        <div class="desc">
+                            • Implemented CoLending backtesting with Scala & Spark for policy drop-off analysis.<br>
+                            • Spearheaded Borrowing & Debt Accounting platform handling ~₹250 crore monthly
+                            transactions.<br>
+                            • Built internal Notification Service & revamped Feedback Capture — halved processing times
+                            and improved agent workflows.
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <h4>Software Development Engineer 1 — OYO</h4>
+                        <div class="time">Aug 2020 — Aug 2021 • Hyderabad</div>
+                        <div class="desc">
+                            • Migrated a microservice from Elasticsearch → MongoDB, reducing daily cost by ~$23/day.<br>
+                            • Rebuilt Kafka consumer pipeline, fixed MongoDB concurrency issues, and developed an
+                            auto-approval rule engine for booking modifications.
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <h4>B.Tech — Computer Science & Engineering (NIT Patna)</h4>
+                        <div class="time">Jul 2016 — Jul 2020</div>
+                        <div class="desc">Strong fundamentals in data structures, algorithms, and systems.</div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="card" id="projects" data-section>
+                <div class="section-title">
+                    <h2>Projects & Highlights</h2>
+                </div>
+                <div class="projects-grid">
+                    <div class="proj tilt">
+                        <strong>CoLending Backtesting</strong>
+                        <div class="muted small" style="margin-top:6px">Scala, Spark — Analytics & drop-off analysis
+                        </div>
+                        <div class="muted small" style="margin-top:8px">Helped product & risk teams design better
+                            policies with A/B experiments.</div>
+                    </div>
+
+                    <div class="proj tilt">
+                        <strong>Anomaly Detection Engine</strong>
+                        <div class="muted small" style="margin-top:6px">Flink, Pinot — Real-time monitoring</div>
+                        <div class="muted small" style="margin-top:8px">Multi-tenant metrics with automated alerts for
+                            funnel degradation.</div>
+                    </div>
+
+                    <div class="proj tilt">
+                        <strong>Borrowing & Debt Accounting</strong>
+                        <div class="muted small" style="margin-top:6px">Core accounting platform</div>
+                        <div class="muted small" style="margin-top:8px">Consolidated internal portals; handles large
+                            monthly transactions.</div>
+                    </div>
+
+                    <div class="proj tilt">
+                        <strong>Notification Service & Feedback Capture</strong>
+                        <div class="muted small" style="margin-top:6px">Microservices & UX improvements</div>
+                        <div class="muted small" style="margin-top:8px">Reduced feedback capture time from ~40s to ~15s.
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Certificates -->
+        <section id="certs" class="card" data-section>
+            <div class="section-title">
+                <h2>Certificates & Awards</h2>
+            </div>
+            <div class="cert-grid">
+                <div class="flip">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <div>
+                                <strong>Oyo Cost Warrior Award</strong>
+                                <div class="muted small">2021</div>
+                            </div>
+                        </div>
+                        <div class="flip-back">
+                            <div>Recognition for cost-optimization initiatives & impact.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <div>
+                                <strong>Navi Spearhead Award</strong>
+                                <div class="muted small">Apr 2024</div>
+                            </div>
+                        </div>
+                        <div class="flip-back">
+                            <div>For leading important engineering initiatives and delivery.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <div>
+                                <strong>FOSSEE Fellowship</strong>
+                                <div class="muted small">IIT Bombay</div>
+                            </div>
+                        </div>
+                        <div class="flip-back">
+                            <div>Selected for fellowship focusing on open-source tools and education.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="card" data-section>
+            <div class="section-title">
+                <h2>Contact</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div style="font-weight:800">Get in touch</div>
+                    <div class="muted small" style="margin-top:8px">Email: <a
+                            href="mailto:shubhamk541@gmail.com">shubhamk541@gmail.com</a></div>
+                    <div class="muted small">Phone: +91 7301558604</div>
+                    <div style="margin-top:12px">
+                        <a class="btn-primary" href="mailto:shubhamk541@gmail.com">Email Me</a>
+                    </div>
+
+                    <div style="margin-top:12px">
+                        <div class="muted small">LinkedIn</div>
+                        <a href="https://www.linkedin.com/in/shubhk541" target="_blank">linkedin.com/in/shubhk541</a>
+                    </div>
+                </div>
+
+                <form class="contact-card" onsubmit="handleContact(event)">
+                    <label>Name</label>
+                    <input id="cname" required placeholder="Your name" />
+                    <label>Email</label>
+                    <input id="cemail" required type="email" placeholder="you@company.com" />
+                    <label>Message</label>
+                    <textarea id="cmsg" rows="4" placeholder="Short message"></textarea>
+                    <button type="submit" class="btn-primary" style="margin-top:10px">Send (demo)</button>
+                    <div id="contactFeedback" class="muted small" style="margin-top:8px;display:none"></div>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            Built with ♥ • Shubham Kumar — Java | Microservices | Data • <span class="muted">© <span
+                    id="year"></span></span>
+        </footer>
+    </div>
+
+    <!-- JS: populate skills + animations -->
+    <script>
+        // Fill dynamic content
+        const skills = ["Java", "Spring Boot", "Apache Kafka", "Elasticsearch", "MongoDB", "PostgreSQL", "Redis", "Spark (Scala)", "Apache Flink", "Pinot", "Microservices", "Kotlin", "React.js", "Data Structures & Algorithms"];
+        const skillsWrap = document.getElementById('skillsWrap');
+        skills.forEach((s, i) => {
+            const el = document.createElement('div');
+            el.className = 'skill-badge tilt';
+            el.textContent = s;
+            el.style.transitionDelay = (i * 40) + 'ms';
+            skillsWrap.appendChild(el);
+        });
+
+        // Resume download (link from your uploaded file)
+        function downloadResume() {
+            window.open('https://drive.google.com/file/d/1d5bzkDO4spMWBp5kXiyG7RZOgkfgLV9t/view?usp=sharing', '_blank');
+        }
+
+        // Contact demo
+        function handleContact(e) {
+            e.preventDefault();
+            const name = document.getElementById('cname').value;
+            const email = document.getElementById('cemail').value;
+            const msg = document.getElementById('cmsg').value;
+            const fb = document.getElementById('contactFeedback');
+            fb.style.display = 'block'; fb.textContent = 'Thanks — demo submission captured. Use mailto or integrate a form service to receive messages.';
+            setTimeout(() => fb.style.display = 'none', 5000);
+        }
+
+        // Small helpers
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero entrance
+        gsap.from(".name", { y: 30, opacity: 0, duration: 0.9, ease: "power4.out" });
+        gsap.from(".role", { y: 20, opacity: 0, duration: 0.9, delay: 0.15 });
+        gsap.from(".hero-cta a", { y: 20, opacity: 0, stagger: 0.08, delay: 0.25 });
+        gsap.from(".hero-meta .meta-pill", { y: 20, opacity: 0, stagger: 0.06, delay: 0.35 });
+
+        // Glow pulsing on name
+        gsap.to("#glowName", { textShadow: "0 12px 40px rgba(110,168,255,0.85)", repeat: -1, yoyo: true, duration: 1.6, ease: "sine.inOut" });
+
+        // Section fade-in
+        gsap.utils.toArray('[data-section]').forEach((sec, i) => {
+            gsap.from(sec, {
+                scrollTrigger: {
+                    trigger: sec,
+                    start: "top 80%"
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.05,
+                ease: "power4.out"
+            });
+        });
+
+        // Skills badges pop
+        gsap.from('.skill-badge', {
+            scrollTrigger: { trigger: "#skills", start: "top 90%" },
+            opacity: 0,
+            y: 16,
+            stagger: 0.07,
+            duration: 0.7,
+            ease: "back.out(1.2)"
+        });
+
+        // Timeline items reveal with ScrollTrigger
+        gsap.utils.toArray('.item').forEach((el, idx) => {
+            gsap.to(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                },
+                x: 0,
+                opacity: 1,
+                duration: 0.7,
+                delay: idx * 0.06,
+                ease: 'power3.out'
+            });
+        });
+
+        // Project cards hover tilt (parallax-ish)
+        document.querySelectorAll('.proj').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const r = card.getBoundingClientRect();
+                const cx = r.left + r.width / 2;
+                const cy = r.top + r.height / 2;
+                const dx = (e.clientX - cx) / r.width;
+                const dy = (e.clientY - cy) / r.height;
+                gsap.to(card, { rotationY: dx * 8, rotationX: -dy * 6, transformPerspective: 600, transformOrigin: 'center', ease: 'power3.out', duration: 0.45 });
+            });
+            card.addEventListener('mouseleave', () => gsap.to(card, { rotationX: 0, rotationY: 0, duration: 0.5, ease: 'power3.out' }));
+        });
+
+        // Certificates flip hint animation
+        gsap.to('.flip-inner', { rotateY: 6, duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut', repeatDelay: 6 });
+
+        // Smooth page-level transitions for anchor clicks
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const href = a.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    const el = document.querySelector(href);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // small parallax background movement on mouse move (hero)
+        document.querySelector('.hero').addEventListener('mousemove', (e) => {
+            const hero = document.querySelector('.hero');
+            const w = window.innerWidth, h = window.innerHeight;
+            const nx = (e.clientX - w / 2) / w;
+            const ny = (e.clientY - h / 2) / h;
+            gsap.to(hero, { backgroundPosition: `${50 - nx * 3}% ${50 - ny * 3}%`, duration: 0.8, ease: 'power1.out' });
+        });
+
+    </script>
+</body>
+
+</html>
